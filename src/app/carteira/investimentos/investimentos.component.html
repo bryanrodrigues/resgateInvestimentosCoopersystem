@@ -1,0 +1,50 @@
+<div class="container">
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Investimentos</h1>
+    </div>
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="investimentos" [responsive]="true" paginator="true" rows="15" #tabela>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>NOME</th>
+            <th>OBJETIVO</th>
+            <th>SALDO TOTAL DISPONÍVEL</th>
+            <th>AÇÃO</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-investimento>
+          <tr>
+            <td>
+              {{investimento.nome}}
+            </td>
+            <td>
+              {{investimento.objetivo}}
+            </td>
+            <td>
+              {{investimento.saldoTotalDisponivel }}
+            </td>
+            <td class="col-acoes">
+              <a *ngIf="investimento.indicadorCarencia == 'N' " pButton style="margin-right: 5px;" icon="pi pi-sign-in"
+                pTooltip="Visualizar" tooltipPosition="top" disabled="true" (click)="onClick(investimento)" routerLink="/resgate"></a>
+
+              <p-button *ngIf="investimento.indicadorCarencia != 'N' " icon="pi pi-sign-in" pTooltip="Visualizar"
+                disabled="true"></p-button>
+
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          Nenhum investimento encontrado
+        </ng-template>
+      </p-table>
+    </div>
+
+  </div>
+
+
+</div>

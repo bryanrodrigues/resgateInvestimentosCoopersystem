@@ -1,0 +1,121 @@
+<div class="container">
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Resgate</h1>
+    </div>
+  </div>
+
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <div class="box">
+        <div class="areaImagem">
+          <i class="pi pi-wallet" style="font-size: 2em"></i>
+        </div>
+
+        <div class="areaTexto">
+          <h4>Dados do Investimento</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p-splitter [style]="{'height': '80px'}" styleClass="p-mb-6 ">
+      <ng-template>
+        <div class="p-col p-d-flex p-ai-left p-jc-left">
+          <h4>Nome: {{investimentos.nome}} </h4>
+
+        </div>
+      </ng-template>
+      <ng-template>
+        <div class="p-col p-d-flex p-ai-left p-jc-left">
+          <h4>Saldo total disponível: {{investimentos.saldoTotalDisponivel}}</h4>
+
+        </div>
+      </ng-template>
+      <ng-template>
+        <div class="p-col p-d-flex p-ai-left p-jc-left">
+          <h4>Valor total a resgatar: {{valorTotalResgate}}</h4>
+
+        </div>
+      </ng-template>
+    </p-splitter>
+  </div>
+
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <div class="box">
+        <div class="areaImagem">
+          <i class="pi pi-chart-line" style="font-size: 2em"></i>
+        </div>
+
+        <div class="areaTexto">
+          <h4>Resgate do seu jeito</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="acoes" [responsive]="true" paginator="true" rows="15" #tabela>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Ação</th>
+            <th>SALDO ACUMULADO</th>
+            <th>VALOR A RESGATAR</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-acao>
+          <tr>
+            <td>
+              {{acao.nome}}
+            </td>
+            <td>
+              R$ {{acao.percentual /100 * investimentos.saldoTotalDisponivel | number:'1.2-2'}}
+            </td>
+            <td>
+              <input pInputText type="number" (keyup)="validateValue($event, acao.percentual)"
+                (focusout)="carregarValorTotalResgate($event)" min="0">
+
+            </td>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          Nenhum investimento encontrado
+        </ng-template>
+      </p-table>
+      <div class="ui-g-12 ui-fluid ui-md-12">
+        <p-messages [(value)]="msgs"></p-messages>
+      </div>
+
+    </div>
+    <br>
+
+
+    <div class="p-d-flex p-jc-between">
+      <div>
+        <a pButton style="margin-right: 5px;" icon="pi pi-sign-in" label="Cancelar" pTooltip="voltar"
+        tooltipPosition="top" disabled="true" routerLink="/investimentos"></a>
+      </div>
+      <div>
+        <p-button (click)="showModalDialog()" icon="pi pi-external-link" label="Confirmar resgate"></p-button>
+        <p-dialog header="RESFATE EFETUADO COM SUCESSO!" [(visible)]="displayModal" [modal]="true"
+          [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+          <h3>O valor solicitado estará em sua conta em até 5 dias úteis.</h3>
+          <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayModal=false" label="Novo resgate" routerLink="/investimentos"
+              styleClass="p-button-text"></p-button>
+          </ng-template>
+        </p-dialog>
+      </div>
+  </div>
+
+
+
+
+
