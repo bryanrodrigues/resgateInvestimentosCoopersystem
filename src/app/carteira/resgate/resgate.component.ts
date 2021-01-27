@@ -56,26 +56,6 @@ export class ResgateComponent implements OnInit {
 
     let valor : number = this.formatarValorMascara(event.target.value);
 
- /*   let valor2 = valor.substr(2);
-
-    if((valor2.substr(valor2.length - 2, 2))== '00'){
-      valor2 = valor2.replace(',', '.');
-      console.log(valor2);
-    }else {
-      valor2 = valor2.replace(',', '.');
-      console.log(valor2);
-    }
-
-    if(valor2.length <= 7){
-      valor = valor2.replace(',', '.');
-    }else{
-      let casaDecimal = valor2.substr(valor2.length - 3, 3);
-      let valorTruncado = valor2.substr(0, valor2.length - 3);
-      let re = /\./gi;
-      valorTruncado = valorTruncado.replace(re, "");
-      valor = valorTruncado + casaDecimal;
-    } */
-
     if( sldAcum < +valor){
       this.valid = false;
       this.msgs = [
