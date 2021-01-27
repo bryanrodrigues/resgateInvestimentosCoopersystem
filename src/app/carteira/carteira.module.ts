@@ -16,7 +16,7 @@ import { ResgateComponent } from './resgate/resgate.component';
 import { RouterModule } from '@angular/router';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
-
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   declarations: [
@@ -36,7 +36,9 @@ import {MessageModule} from 'primeng/message';
     SplitterModule,
     InputNumberModule,
     DialogModule,
-    RouterModule
+    RouterModule,
+    CurrencyMaskModule,
+
   ],
   exports: [ InvestimentosComponent,    ResgateComponent]
 })

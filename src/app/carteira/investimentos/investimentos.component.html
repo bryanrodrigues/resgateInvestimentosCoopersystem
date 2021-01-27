@@ -26,7 +26,7 @@
               {{investimento.objetivo}}
             </td>
             <td>
-              {{investimento.saldoTotalDisponivel }}
+              R$ {{investimento.saldoTotalDisponivel | number:'1.2-2' }}
             </td>
             <td class="col-acoes">
               <a *ngIf="investimento.indicadorCarencia == 'N' " pButton style="margin-right: 5px;" icon="pi pi-sign-in"

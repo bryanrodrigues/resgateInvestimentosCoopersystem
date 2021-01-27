@@ -6,7 +6,6 @@
     </div>
   </div>
 
-
   <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12">
       <div class="box">
@@ -31,13 +30,13 @@
       </ng-template>
       <ng-template>
         <div class="p-col p-d-flex p-ai-left p-jc-left">
-          <h4>Saldo total disponível: {{investimentos.saldoTotalDisponivel}}</h4>
+          <h4>Saldo total disponível: R$ {{investimentos.saldoTotalDisponivel | number:'1.2-2'}}</h4>
 
         </div>
       </ng-template>
       <ng-template>
         <div class="p-col p-d-flex p-ai-left p-jc-left">
-          <h4>Valor total a resgatar: {{valorTotalResgate}}</h4>
+          <h4>Valor total a resgatar: R$ {{valorTotalResgate | number:'1.2-2'}}</h4>
 
         </div>
       </ng-template>
@@ -78,8 +77,10 @@
               R$ {{acao.percentual /100 * investimentos.saldoTotalDisponivel | number:'1.2-2'}}
             </td>
             <td>
-              <input pInputText type="number" (keyup)="validateValue($event, acao.percentual)"
-                (focusout)="carregarValorTotalResgate($event)" min="0">
+              <input pInputText type="text" currencyMask [options]="{prefix: 'R$ ', thousands: '.', decimal:',' , 'allowNegative': false}"
+                (keyup)="validateValue($event, acao.percentual)"
+                (focusout)="carregarValorTotalResgate($event, acao.id)" min="0">
+
 
             </td>
 
@@ -100,11 +101,12 @@
     <div class="p-d-flex p-jc-between">
       <div>
         <a pButton style="margin-right: 5px;" icon="pi pi-sign-in" label="Cancelar" pTooltip="voltar"
-        tooltipPosition="top" disabled="true" routerLink="/investimentos"></a>
+          tooltipPosition="top" disabled="true" routerLink="/investimentos"></a>
       </div>
       <div>
-        <p-button (click)="showModalDialog()" icon="pi pi-external-link" label="Confirmar resgate"></p-button>
-        <p-dialog header="RESFATE EFETUADO COM SUCESSO!" [(visible)]="displayModal" [modal]="true"
+        <p-button (click)="showModalDialog()" [disabled]="!valid" icon="pi pi-external-link" label="Confirmar resgate">
+        </p-button>
+        <p-dialog header="RESGATE EFETUADO COM SUCESSO!" [(visible)]="displayModal" [modal]="true"
           [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
           <h3>O valor solicitado estará em sua conta em até 5 dias úteis.</h3>
           <ng-template pTemplate="footer">
@@ -113,9 +115,5 @@
           </ng-template>
         </p-dialog>
       </div>
-  </div>
 
-
-
-
-
+    </div>
